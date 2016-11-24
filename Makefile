@@ -6,13 +6,13 @@
 #    By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/24 19:58:53 by agrumbac          #+#    #+#              #
-#    Updated: 2016/11/24 20:33:51 by agrumbac         ###   ########.fr        #
+#    Updated: 2016/11/25 00:06:07 by agrumbac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
-SRC = ./main.c
+SRC = main.c checkblock.c readnstore.c fillit.c
 
 LIBFT = libft.a
 
@@ -26,7 +26,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 CC = gcc
 
-all:${NAME}
+all: ${NAME}
 
 ${NAME}:
 	@echo " ______ _____ _      _      _____ _______"
@@ -34,17 +34,21 @@ ${NAME}:
 	@echo "| |__    | | | |    | |      | |    | |"
 	@echo "|  __|   | | | |    | |      | |    | |"
 	@echo "| |     _| |_| |____| |____ _| |_   | |"
-	@echo "|_|    |_____|______|______|_____|  |_|"
+	@echo "|_|    |_____|______|______|_____|  |_|\n"
 	@${CC} -I ${SRCH} -c ${SRC} ${CFLAGS}
 	@${CC} ${SRCO} -o ${NAME} ${LIBFT}
 
-.PHONY: clean fclean
+.PHONY: clean fclean test
 
 clean:
-	@rm -f ${SRCO}
-	@rm -f ${SRCGH}
+	rm -f ${SRCO}
+	rm -f ${SRCGH}
 
 fclean: clean
-	@rm -f ${NAME}
+	rm -f ${NAME}
 
 re: fclean all
+
+test: fclean
+	${CC} ${SRC} -o ${NAME} ${LIBFT}
+	rm -f ${SRCGH}
