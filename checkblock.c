@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-int			countfriends(char *tetri, int i)
+static int	countfriends(char *tetri, int i)
 {
 	int	friends;
 
@@ -21,7 +21,7 @@ int			countfriends(char *tetri, int i)
 		friends++;
 	if (tetri[i - 1] == '#')
 		friends++;
-	if (tetri[(i - 5 > 0 ? i - 5 : 4)] == '#')
+	if (tetri[(i - 5 >= 0 ? i - 5 : 4)] == '#')
 		friends++;
 	if (tetri[(i + 5 < 19 ? i + 5 : 4)] == '#')
 		friends++;
@@ -60,11 +60,8 @@ int			checkblock(char *tetri, int ret)
 	line = 0;
 	if (ret != 21 && ret != 20)
 		return (0);
-printf("hey!\n");
-	if (ft_strlen(tetri) != ret)
+	if (ft_strlen(tetri) != (size_t)ret)
 		return (0);
-printf("hey!\n");
-
 	while (i < 20)
 	{
 		while (tetri[i] == '.' || tetri[i] == '#')
@@ -76,11 +73,7 @@ printf("hey!\n");
 	}
 	if ((tetri[i] != '\n' && tetri[i] != '\0') || line != 4)
 		return (0);
-		printf("hey!\n");
-
 	if (!(blockchecker(tetri)))
 		return (0);
-		printf("hey!\n");
-
 	return (1);
 }

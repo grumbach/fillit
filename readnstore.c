@@ -20,12 +20,12 @@
 t_list	*readnstore(int fd)
 {
 	int			ret;
-	int			n;
 	char		buf[BUF_SIZE + 1];
 	t_list		*blocks;
+	t_list		*firstblock;
 
-	n = 0;
 	blocks = NULL;
+	firstblock = NULL;
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
 		buf[ret] = '\0';
@@ -34,9 +34,12 @@ t_list	*readnstore(int fd)
 		else
 		{
 			blocks = ft_lstnew(buf, (BUF_SIZE + 1));
+			if (blocks == NULL)
+				return (NULL);
+			if (firstblock == NULL)
+				firstblock = blocks;
 			blocks = blocks->next;
-			n++;
 		}
 	}
-	return (blocks);
+	return (firstblock);
 }
