@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:30:53 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/11/29 21:30:13 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/11/29 23:13:14 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ char	**square(int size)
 	char	**sq;
 
 	i = 0;
-	sq = (char**)malloc(sizeof(*sq) * size);
+	if (!(sq = (char**)malloc(sizeof(*sq) * size)))
+		return (NULL);
 	while (i < size)
 	{
-		sq[i] = malloc(sizeof(*sq) * size);
+		if (!(sq[i] = malloc(sizeof(*sq) * size + 1)))
+			return (NULL);
 		i++;
 	}
 	return (sq);
