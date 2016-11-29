@@ -6,7 +6,7 @@
 /*   By: kneth <kneth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 10:21:12 by kneth             #+#    #+#             */
-/*   Updated: 2016/11/29 15:04:15 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/11/29 22:05:44 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ static int	ft_errors(int error)
 	return (-1);
 }
 
+void		disp_table(char **table)/*table[i] must have ending \0 on each end*/
+{
+	int		i;
+	int		len;
+
+	i = 0;
+	len = strlen(table[0]);
+	while (i < len)
+	{
+		ft_putstr(table[i]);
+		ft_putchar('\n');
+		i++;
+	}
+}
+
 int			main(int ac, char **av)
 {
 	int		fd;
@@ -41,6 +56,6 @@ int			main(int ac, char **av)
 		return (ft_errors(2));
 	if (close(fd) == -1)
 		return (ft_errors(3));
-	ft_putstr(fillit(blocks));
+	disp_table(fillit(blocks));
 	return (0);
 }

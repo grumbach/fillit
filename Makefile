@@ -6,13 +6,13 @@
 #    By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/24 19:58:53 by agrumbac          #+#    #+#              #
-#    Updated: 2016/11/25 00:06:07 by agrumbac         ###   ########.fr        #
+#    Updated: 2016/11/29 22:05:40 by agrumbac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
-SRC = main.c checkblock.c readnstore.c fillit.c
+SRC = main.c checkblock.c readnstore.c fillit.c square.c
 
 LIBFT = libft.a
 
