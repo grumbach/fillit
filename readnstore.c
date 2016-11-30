@@ -6,7 +6,7 @@
 /*   By: kneth <kneth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 18:01:49 by kneth             #+#    #+#             */
-/*   Updated: 2016/11/29 15:03:45 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/11/30 20:52:09 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_list			*readnstore(int fd)
 		else
 		{
 			i++;
-			blocks = ft_lstnew(encode(buf, 'A' + i), BUF_SIZE);
+			blocks = ft_lstnew(encode(buf, 'A' + i), sizeof(t_tetri));
 			if (blocks == NULL)
 				return (NULL);
 			if (firstblock == NULL)

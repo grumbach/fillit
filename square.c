@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:30:53 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/11/29 23:13:14 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/11/30 18:40:38 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	**square(int size)
 	{
 		if (!(sq[i] = malloc(sizeof(*sq) * size + 1)))
 			return (NULL);
+		sq[i][size] = '\0';
 		i++;
 	}
 	return (sq);
@@ -34,9 +35,8 @@ void	place(char **square, char *blockcode, int y, int x)
 	int		i;
 
 	i = 0;
-	while (ft_isdigit(blockcode[i]))
-		i++;
-	square[y][x] = blockcode[i];
+	if (ft_isalpha(blockcode[i]))
+		square[y][x] = blockcode[i];
 	while (blockcode[i] != '\0')
 	{
 		if (blockcode[i] == 'd' || blockcode[i] == 'l' || blockcode[i] == 'd')
@@ -60,9 +60,8 @@ void	erase(char **square, char *blockcode, int y, int x)
 	int		i;
 
 	i = 0;
-	while (ft_isdigit(blockcode[i]))
-		i++;
-	square[y][x] = blockcode[i];
+	if (ft_isalpha(blockcode[i]))
+		square[y][x] = '.';
 	while (blockcode[i] != '\0')
 	{
 		if (blockcode[i] == 'd' || blockcode[i] == 'l' || blockcode[i] == 'd')
