@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 22:29:03 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/12/01 16:13:09 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:18:21 by kneth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	blockletter(char *blockcode, char *buf, int j, char c, int x, int y)
 	}
 }
 
+
+//fix this
 static char	*blockcode(char *blockcode, char *buf, char c, int code[6])
 {
 	int		x;
