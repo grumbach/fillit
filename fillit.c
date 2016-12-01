@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 23:24:56 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/11/30 22:33:42 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/01 15:59:11 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ static int		solve(t_list blocks, int y, int x, int sq_size, char **square)
 	if (!check(blocks->content->blockcode, square, y, x))//check if can place block
 		return (solve(blocks, y, x + 1, sq_size, square));//check at x+1
 	place(square, blocks->content->blockcode, y, x);//place coz ok!
-	if (solve(blocks->next, y, x, sq_size, square) == -1)//backtrackloop
+	if (solve(blocks->next, 0, 0, sq_size, square) == -1)//backtrackloop
 	{
 		erase(square, blocks->content->blockcode, y, x);//rm if error
-		return (solve(blocks, y, x, sq_size, square));//try again with cur block
+		return (solve(blocks, y, x + 1, sq_size, square));//try again with cur block
 	}
 	return (0);//shows me if I'm stupid today, I certainly am sometimes!
 }

@@ -6,9 +6,11 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 22:29:03 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/11/30 22:33:39 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/01 16:13:09 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fillit.h"
 
 static void	checkpos(char *tetri, int code[4])
 {
@@ -103,4 +105,5 @@ t_tetri		*encode(char *buf, char c)
 	tetri->y = 1 + code[1] - code[3];
 	tetri->x = 1 + code[0] - code[2];
 	tetri->blockcode = codeblock(blockcode, buf, c, code);
+	return (tetri);
 }
