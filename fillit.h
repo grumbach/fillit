@@ -6,7 +6,7 @@
 /*   By: kneth <kneth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 18:17:24 by kneth             #+#    #+#             */
-/*   Updated: 2016/11/30 22:33:45 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:21:55 by kneth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ typedef struct		s_tetri
 int					checkblock(char *tetri, int ret);
 t_list				*readnstore(int fd);
 t_tetri				*encode(char *buf, char c);
+int					blockletter(char *blockcode, char *buf, char c, \
+						int xyjbm[5]);
+void				checkright(char *blockcode, char *buf, char c, \
+						int xyjbm[5]);
+void				checkleft(char *blockcode, char *buf, char c, int xyjbm[5]);
+void				checkdown(char *blockcode, char *buf, char c, int xyjbm[5]);
 char				**fillit(t_list *blocks);
 char				**square(int size);
 void				place(char **square, char *blockcode, int y, int x);

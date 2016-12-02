@@ -6,13 +6,13 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 22:29:03 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/12/01 16:18:21 by kneth            ###   ########.fr       */
+/*   Updated: 2016/12/02 17:25:13 by kneth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void	checkpos(char *tetri, int code[4])
+static void	checkpos(char *tetri, int code[6])
 {
 	int		i;
 
@@ -38,58 +38,28 @@ static void	checkpos(char *tetri, int code[4])
 	}
 }
 
-static int	blockletter(char *blockcode, char *buf, int j, char c, int x, int y)
+static char	*codeblock(char *bc, char *buf, char c, int code[6])
 {
-	if (buf[(x + 5 * y)] == '.')
-	{
-		blockcode[j] = '.';
-		return (0);
-	}
-	else if (buf[(x + 5 * y)] == '#')
-	{
-		blockcode[j] = c;
-		return (1);
-	}
-}
+	int		xyjbm[5];
 
-
-//fix this
-static char	*blockcode(char *blockcode, char *buf, char c, int code[6])
-{
-	int		x;
-	int		y;
-	int		j;
-	int		blocks;
-
-	j = 0;
-	y = code[3];
-	x = code[2];
-	blocks = 0;
-	while (blocks < 4)
+	xyjbm[0] = code[2];
+	xyjbm[1] = code[3];
+	xyjbm[2] = 0;
+	xyjbm[3] = 0;
+	xyjbm[4] = code[4] * code[5];
+	while (xyjbm[3] < (xyjbm[4] - 1))
 	{
-		while (x < code[0])
-		{
-			blocks += blockletter(blockcode, buf, j, c, x, y);
-			j++;
-			blockcode[j] = 'r';
-			x++;
-		}
-		if (y < code[1])
-		{
-			blocks += blockletter(blockcode, buf, j, c, x, y);
-			j++;
-			blockcode[j] = 'd';
-			y++;
-		}
-		while (x > code[2])
-		{
-			blocks += blockletter(blockcode, buf, j, c, x, y);
-			j++;
-			blockcode[j] = 'l';
-			x--;
-		}
+		while (xyjbm[0] < code[0] && xyjbm[3] < (xyjbm[4] - 1))
+			checkright(bc, buf, c, xyjbm);
+		if (xyjbm[1] < code[1] && xyjbm[3] < (xyjbm[4] - 1))
+			checkdown(bc, buf, c, xyjbm);
+		while (xyjbm[0] > code[2] && xyjbm[3] < (xyjbm[4] - 1))
+			checkleft(bc, buf, c, xyjbm);
+		if (xyjbm[1] < code[1] && xyjbm[3] < (xyjbm[4] - 1))
+			checkdown(bc, buf, c, xyjbm);
 	}
-	return (blockcode);
+	blockletter(bc, buf, c, xyjbm);
+	return (bc);
 }
 
 t_tetri		*encode(char *buf, char c)
@@ -98,14 +68,16 @@ t_tetri		*encode(char *buf, char c)
 	char	*blockcode;
 	t_tetri	*tetri;
 
-	checkpos(tetri, code);
+	checkpos(buf, code);
 	if (!(blockcode = (char*)malloc(sizeof(*blockcode) * 14)))
 		return (NULL);
 	if (!(tetri = (t_tetri*)malloc(sizeof(t_tetri))))
 		return (NULL);
-	ft_bzero(blockcode);
-	tetri->y = 1 + code[1] - code[3];
-	tetri->x = 1 + code[0] - code[2];
+	ft_bzero(blockcode, 14);
+	code[4] = 1 + code[0] - code[2];
+	code[5] = 1 + code[1] - code[3];
+	tetri->x = code[4];
+	tetri->y = code[5];
 	tetri->blockcode = codeblock(blockcode, buf, c, code);
 	return (tetri);
 }
