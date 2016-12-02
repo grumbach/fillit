@@ -6,7 +6,7 @@
 /*   By: kneth <kneth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 10:21:12 by kneth             #+#    #+#             */
-/*   Updated: 2016/11/29 22:05:44 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/02 17:38:47 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_errors(int error)
 	return (-1);
 }
 
-void		disp_table(char **table)/*table[i] must have ending \0 on each end*/
+void		disp_table(char **table)
 {
 	int		i;
 	int		len;

@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 23:24:56 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/12/01 15:59:11 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/02 18:30:11 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void			tetri_free(void *content, size_t size)
 {
 	if (size == sizeof(t_tetri))
 	{
-		free(content->blockcode);
+		free(((t_tetri*)(content))->blockcode);
 		free(content);
 	}
 	content = NULL;
@@ -68,20 +68,20 @@ static int		check(char *blockcode, char **square, int y, int x)
 
 //fix 5 parrams
 
-static int		solve(t_list blocks, int y, int x, int sq_size, char **square)
+static int		solve(t_list *blocks, int y, int x, int sq_size, char **square)
 {
 	if (blocks == NULL)//reached end of list? YEAH!! :D
 		return (1);
-	if (sq_size - x < blocks->content->x)//room in X?
+	if (sq_size - x < ((t_tetri*)(blocks->content))->x)//room in X?
 		return (solve(blocks, y + 1, 0, sq_size, square));//nope? go down
-	if (sq_size - y < blocks->content->y)//room in Y?
+	if (sq_size - y < ((t_tetri*)(blocks->content))->y)//room in Y?
 		return (-1);//no more room down there give up bro
-	if (!check(blocks->content->blockcode, square, y, x))//check if can place block
+	if (!check(((t_tetri*)(blocks->content))->blockcode, square, y, x))//check if can place block
 		return (solve(blocks, y, x + 1, sq_size, square));//check at x+1
-	place(square, blocks->content->blockcode, y, x);//place coz ok!
+	place(square, ((t_tetri*)(blocks->content))->blockcode, y, x);//place coz ok!
 	if (solve(blocks->next, 0, 0, sq_size, square) == -1)//backtrackloop
 	{
-		erase(square, blocks->content->blockcode, y, x);//rm if error
+		erase(square, ((t_tetri*)(blocks->content))->blockcode, y, x);//rm if error
 		return (solve(blocks, y, x + 1, sq_size, square));//try again with cur block
 	}
 	return (0);//shows me if I'm stupid today, I certainly am sometimes!
@@ -95,7 +95,7 @@ char			**fillit(t_list *blocks)
 	sq_size = 2 * ft_sqrt(ft_lstsize(blocks));
 	if (!(sq = square(sq_size)))
 		return (NULL);
-	while (solve(blocks, 0, 0, sq_size, square) == -1)
+	while (solve(blocks, 0, 0, sq_size, sq) == -1)
 	{
 		sq_free(sq, sq_size);
 		sq_size++;
