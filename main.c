@@ -6,7 +6,7 @@
 /*   By: kneth <kneth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 10:21:12 by kneth             #+#    #+#             */
-/*   Updated: 2016/12/02 17:38:47 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/02 23:26:32 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static int	ft_errors(int error)
 	if (error == 0)
 		ft_putstr_fd("usage: ./fillit input_file\n", 2);
 	else if (error == 1)
-		ft_putstr_fd("open() errror\n", 2);
+		ft_putstr_fd("open() error\n", 2);
 	else if (error == 2)
-		ft_putstr_fd("invalid file\n", 2);
+		ft_putstr_fd("error\n", 1);
 	else if (error == 3)
-		ft_putstr_fd("close() errror\n", 2);
-	return (-1);
+		ft_putstr_fd("close() error\n", 2);
+	return (0);
 }
 
 void		disp_table(char **table)

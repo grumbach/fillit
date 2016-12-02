@@ -6,7 +6,7 @@
 #    By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/24 19:58:53 by agrumbac          #+#    #+#              #
-#    Updated: 2016/12/02 17:30:02 by agrumbac         ###   ########.fr        #
+#    Updated: 2016/12/02 18:43:12 by agrumbac         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,3 +52,4 @@ re: fclean all
 test: fclean
 	${CC} ${SRC} -o ${NAME} ${LIBFT}
 	rm -f ${SRCGH}
+	rm -f ${SRCO}

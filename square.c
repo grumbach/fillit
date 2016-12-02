@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 15:30:53 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/11/30 18:40:38 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/02 22:44:19 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	**square(int size)
 	{
 		if (!(sq[i] = malloc(sizeof(*sq) * size + 1)))
 			return (NULL);
+		ft_memset(sq[i], '.', size);
 		sq[i][size] = '\0';
 		i++;
 	}
@@ -39,7 +40,7 @@ void	place(char **square, char *blockcode, int y, int x)
 		square[y][x] = blockcode[i];
 	while (blockcode[i] != '\0')
 	{
-		if (blockcode[i] == 'd' || blockcode[i] == 'l' || blockcode[i] == 'd')
+		if (blockcode[i] == 'r' || blockcode[i] == 'l' || blockcode[i] == 'd')
 		{
 			if (blockcode[i] == 'r')
 				x++;
@@ -64,7 +65,7 @@ void	erase(char **square, char *blockcode, int y, int x)
 		square[y][x] = '.';
 	while (blockcode[i] != '\0')
 	{
-		if (blockcode[i] == 'd' || blockcode[i] == 'l' || blockcode[i] == 'd')
+		if (blockcode[i] == 'r' || blockcode[i] == 'l' || blockcode[i] == 'd')
 		{
 			if (blockcode[i] == 'r')
 				x++;

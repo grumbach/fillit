@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 23:24:56 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/12/02 18:30:11 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/02 23:37:31 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,11 @@ static int		check(char *blockcode, char **square, int y, int x)
 	int		i;
 
 	i = 0;
-	if (ft_isalpha(blockcode[i]))
-		if (ft_isalpha(square[x][y]))
-			return (0);
+	if (ft_isalpha(blockcode[i]) && ft_isalpha(square[y][x]))
+		return (0);
 	while (blockcode[i] != '\0')
 	{
-		if (blockcode[i] == 'd' || blockcode[i] == 'l' || blockcode[i] == 'd')
+		if (blockcode[i] == 'r' || blockcode[i] == 'l' || blockcode[i] == 'd')
 		{
 			if (blockcode[i] == 'r')
 				x++;
@@ -57,9 +56,8 @@ static int		check(char *blockcode, char **square, int y, int x)
 			else if (blockcode[i] == 'd')
 				y++;
 			i++;
-			if (ft_isalpha(blockcode[i]))
-				if (ft_isalpha(square[x][y]))
-					return (0);
+			if (ft_isalpha(blockcode[i]) && ft_isalpha(square[y][x]))
+				return (0);
 		}
 		i++;
 	}
@@ -70,20 +68,29 @@ static int		check(char *blockcode, char **square, int y, int x)
 
 static int		solve(t_list *blocks, int y, int x, int sq_size, char **square)
 {
+disp_table(square);
+system("sleep 0.01");
+system("clear");
+printf("fillit y%i-x%i\n", y, x);
 	if (blocks == NULL)//reached end of list? YEAH!! :D
 		return (1);
-	if (sq_size - x < ((t_tetri*)(blocks->content))->x)//room in X?
+//printf("x-");
+	if (sq_size < x + ((t_tetri*)(blocks->content))->x)//room in X?
 		return (solve(blocks, y + 1, 0, sq_size, square));//nope? go down
-	if (sq_size - y < ((t_tetri*)(blocks->content))->y)//room in Y?
+//printf("y-");
+	if (sq_size < y + ((t_tetri*)(blocks->content))->y)//room in Y?
 		return (-1);//no more room down there give up bro
-	if (!check(((t_tetri*)(blocks->content))->blockcode, square, y, x))//check if can place block
+//printf("check fail-");
+	if (!(check(((t_tetri*)(blocks->content))->blockcode, square, y, x)))//check if can place block
 		return (solve(blocks, y, x + 1, sq_size, square));//check at x+1
 	place(square, ((t_tetri*)(blocks->content))->blockcode, y, x);//place coz ok!
+//printf("placed!");
 	if (solve(blocks->next, 0, 0, sq_size, square) == -1)//backtrackloop
 	{
 		erase(square, ((t_tetri*)(blocks->content))->blockcode, y, x);//rm if error
 		return (solve(blocks, y, x + 1, sq_size, square));//try again with cur block
 	}
+//printf("ano baka!\n");
 	return (0);//shows me if I'm stupid today, I certainly am sometimes!
 }
 
@@ -92,7 +99,9 @@ char			**fillit(t_list *blocks)
 	int		sq_size;
 	char	**sq;
 
-	sq_size = 2 * ft_sqrt(ft_lstsize(blocks));
+	sq_size = (ft_sqrt(ft_lstsize(blocks) * 4));
+	if (sq_size < 3)
+		sq_size = 3;
 	if (!(sq = square(sq_size)))
 		return (NULL);
 	while (solve(blocks, 0, 0, sq_size, sq) == -1)
