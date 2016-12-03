@@ -6,7 +6,7 @@
 /*   By: kneth <kneth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 10:21:12 by kneth             #+#    #+#             */
-/*   Updated: 2016/12/02 23:26:32 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/03 18:02:25 by kneth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		disp_table(char **table)
 	int		len;
 
 	i = 0;
-	len = strlen(table[0]);
+	len = ft_strlen(table[0]);
 	while (i < len)
 	{
 		ft_putstr(table[i]);

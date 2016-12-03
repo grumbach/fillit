@@ -6,7 +6,7 @@
 /*   By: kneth <kneth@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 18:17:24 by kneth             #+#    #+#             */
-/*   Updated: 2016/12/02 18:58:30 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/03 11:45:30 by kneth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ char				**square(int size);
 void				place(char **square, char *blockcode, int y, int x);
 void				erase(char **square, char *blockcode, int y, int x);
 
-void		disp_table(char **table);
+void				disp_table(char **table);
 
 #endif

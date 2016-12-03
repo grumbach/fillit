@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 23:24:56 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/12/02 23:58:29 by agrumbac         ###   ########.fr       */
+/*   Updated: 2016/12/03 11:44:17 by kneth            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,31 +64,23 @@ static int		check(char *blockcode, char **square, int y, int x)
 	return (1);
 }
 
-//fix 5 parrams
-
 static int		solve(t_list *blocks, int y, int x, char **square)
 {
-//disp_table(square);
-//system("sleep 0.01");
-//system("clear");
-//printf("fillit y%i-x%i\n", y, x);
-	if (blocks == NULL)//reached end of list? YEAH!! :D
+	if (blocks == NULL)
 		return (1);
-	if (ft_strlen(square[0]) < y + ((t_tetri*)(blocks->content))->y)//room in Y?
-		return (-1);//no more room down there give up bro
-	if (ft_strlen(square[0]) < x + ((t_tetri*)(blocks->content))->x)//room in X?
-		return (solve(blocks, y + 1, 0, square));//nope? go down
-	if (!(check(((t_tetri*)(blocks->content))->blockcode, square, y, x)))//check if can place block
-		return (solve(blocks, y, x + 1, square));//check at x+1
-	place(square, ((t_tetri*)(blocks->content))->blockcode, y, x);//place coz ok!
-//printf("placed!");
-	if (solve(blocks->next, 0, 0, square) == -1)//backtrackloop
+	if ((int)ft_strlen(square[0]) < y + ((t_tetri*)(blocks->content))->y)
+		return (-1);
+	if ((int)ft_strlen(square[0]) < x + ((t_tetri*)(blocks->content))->x)
+		return (solve(blocks, y + 1, 0, square));
+	if (!(check(((t_tetri*)(blocks->content))->blockcode, square, y, x)))
+		return (solve(blocks, y, x + 1, square));
+	place(square, ((t_tetri*)(blocks->content))->blockcode, y, x);
+	if (solve(blocks->next, 0, 0, square) == -1)
 	{
-		erase(square, ((t_tetri*)(blocks->content))->blockcode, y, x);//rm if error
-		return (solve(blocks, y, x + 1, square));//try again with cur block
+		erase(square, ((t_tetri*)(blocks->content))->blockcode, y, x);
+		return (solve(blocks, y, x + 1, square));
 	}
-//printf("ano baka!\n");
-	return (0);//shows me if I'm stupid today, I certainly am sometimes!
+	return (0);
 }
 
 char			**fillit(t_list *blocks)
