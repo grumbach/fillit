@@ -6,7 +6,7 @@
 /*   By: agrumbac <agrumbac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 23:24:56 by agrumbac          #+#    #+#             */
-/*   Updated: 2016/12/03 11:44:17 by kneth            ###   ########.fr       */
+/*   Updated: 2016/12/04 18:31:28 by agrumbac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ char			**fillit(t_list *blocks)
 	char	**sq;
 
 	sq_size = (ft_sqrt(ft_lstsize(blocks) * 4));
-	if (sq_size < 3)
-		sq_size = 3;
 	if (!(sq = square(sq_size)))
 		return (NULL);
 	while (solve(blocks, 0, 0, sq) == -1)
